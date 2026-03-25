@@ -1,0 +1,70 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "tryAgain": "Try again",
+    "backToCatalog": "← Back to catalog",
+    "error": "Error"
+  },
+  "navbar": {
+    "catalog": "Catalog",
+    "myCourses": "My Account"
+  },
+  "home": {
+    "title": "Level Up Your Skills",
+    "subtitle": "Discover high-quality courses with industry experts. Start today and accelerate your career.",
+    "loadingCourses": "Loading courses..."
+  },
+  "productCard": {
+    "viewDetails": "View details →"
+  },
+  "productDetail": {
+    "loadingCourse": "Loading course details...",
+    "courseNotFound": "Course not found",
+    "buyNow": "Buy Now",
+    "whatYouLearn": "What you'll learn",
+    "practicalProjects": "Practical projects and applied exercises",
+    "bestPractices": "Best practices and industry-standard patterns",
+    "lifetimeAccess": "Lifetime access to course content",
+    "certificate": "Certificate of completion"
+  },
+  "checkout": {
+    "loading": "Loading checkout...",
+    "productNotFound": "Product not found",
+    "backToCourse": "← Back to course",
+    "title": "Checkout",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "processing": "Processing...",
+    "completePurchase": "Complete purchase — ${{price}}",
+    "securePayment": "🔒 Your payment is secure. This checkout is simulated.",
+    "successTitle": "Purchase Complete!",
+    "successMessage": "Thank you for purchasing {{title}}.",
+    "orderId": "Order ID: {{id}}",
+    "goToMyCourses": "Go to My Account",
+    "seeMoreCourses": "See More Courses",
+    "purchaseSuccess": "Purchase completed successfully! 🎉"
+  },
+  "myCourses": {
+    "title": "My Account",
+    "subtitle": "Enter your email to access your purchased courses",
+    "emailPlaceholder": "you@example.com",
+    "search": "View",
+    "searching": "Fetching your courses...",
+    "noCoursesTitle": "No courses found for this email.",
+    "noCoursesSubtitle": "Buy a course to get started!",
+    "noCoursesFound": "No courses found for this email",
+    "coursesCount_one": "{{count}} purchased course",
+    "coursesCount_other": "{{count}} purchased courses",
+    "purchasedOn": "Purchased on {{date}}",
+    "watch": "▶️ Watch",
+    "close": "⏸️ Close",
+    "continueWatching": "▶️ Continue",
+    "markComplete": "✓ Mark as complete",
+    "completed": "✅ Completed",
+    "progress": "Progress",
+    "continueWatchingSection": "Continue Watching",
+    "myLibrary": "My Library",
+    "completedCourses": "Completed",
+    "inProgress": "In Progress"
+  }
+}

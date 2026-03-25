@@ -1,0 +1,70 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "tryAgain": "Intentar de nuevo",
+    "backToCatalog": "← Volver al catálogo",
+    "error": "Error"
+  },
+  "navbar": {
+    "catalog": "Catálogo",
+    "myCourses": "Mi Cuenta"
+  },
+  "home": {
+    "title": "Mejora Tus Habilidades",
+    "subtitle": "Descubre cursos de alta calidad con expertos de la industria. Empieza hoy y acelera tu carrera.",
+    "loadingCourses": "Cargando cursos..."
+  },
+  "productCard": {
+    "viewDetails": "Ver detalles →"
+  },
+  "productDetail": {
+    "loadingCourse": "Cargando detalles del curso...",
+    "courseNotFound": "Curso no encontrado",
+    "buyNow": "Comprar Ahora",
+    "whatYouLearn": "Lo que aprenderás",
+    "practicalProjects": "Proyectos prácticos y ejercicios aplicados",
+    "bestPractices": "Buenas prácticas y patrones usados en la industria",
+    "lifetimeAccess": "Acceso de por vida al contenido del curso",
+    "certificate": "Certificado de finalización"
+  },
+  "checkout": {
+    "loading": "Cargando checkout...",
+    "productNotFound": "Producto no encontrado",
+    "backToCourse": "← Volver al curso",
+    "title": "Finalizar Compra",
+    "emailLabel": "Dirección de correo electrónico",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "processing": "Procesando...",
+    "completePurchase": "Completar compra — ${{price}}",
+    "securePayment": "🔒 Tu pago es seguro. Este checkout es simulado.",
+    "successTitle": "¡Compra Realizada!",
+    "successMessage": "Gracias por comprar {{title}}.",
+    "orderId": "ID del pedido: {{id}}",
+    "goToMyCourses": "Ir a Mi Cuenta",
+    "seeMoreCourses": "Ver Más Cursos",
+    "purchaseSuccess": "¡Compra completada con éxito! 🎉"
+  },
+  "myCourses": {
+    "title": "Mi Cuenta",
+    "subtitle": "Ingresa tu correo para acceder a tus cursos comprados",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "search": "Ver",
+    "searching": "Buscando tus cursos...",
+    "noCoursesTitle": "No se encontraron cursos para este correo.",
+    "noCoursesSubtitle": "¡Compra un curso para comenzar!",
+    "noCoursesFound": "No se encontraron cursos para este correo",
+    "coursesCount_one": "{{count}} curso comprado",
+    "coursesCount_other": "{{count}} cursos comprados",
+    "purchasedOn": "Comprado el {{date}}",
+    "watch": "▶️ Ver",
+    "close": "⏸️ Cerrar",
+    "continueWatching": "▶️ Continuar",
+    "markComplete": "✓ Marcar como completado",
+    "completed": "✅ Completado",
+    "progress": "Progreso",
+    "continueWatchingSection": "Continuar Viendo",
+    "myLibrary": "Mi Biblioteca",
+    "completedCourses": "Completados",
+    "inProgress": "En progreso"
+  }
+}
