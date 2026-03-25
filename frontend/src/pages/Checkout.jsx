@@ -1,24 +1,31 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { fetchProduct, submitCheckout } from '../services/api';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { fetchProduct, submitCheckout, getCurrentUser } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Checkout({ addToast }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const user = getCurrentUser();
 
   useEffect(() => {
+    if (!user) {
+      addToast('Voce precisa estar logado para comprar', 'error');
+      navigate('/login');
+      return;
+    }
     fetchProduct(productId)
       .then(setProduct)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, [productId]);
+  }, [productId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +33,7 @@ export default function Checkout({ addToast }) {
     setError(null);
 
     try {
-      const result = await submitCheckout(productId, email);
+      const result = await submitCheckout(productId);
       setSuccess(result);
       addToast('Compra concluida com sucesso! 🎉', 'success');
     } catch (err) {
@@ -107,31 +114,17 @@ export default function Checkout({ addToast }) {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Endereco de e-mail
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="voce@exemplo.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-            />
-          </div>
+        <p className="text-sm text-gray-600 mb-4">
+          Comprando como: <strong>{user?.email}</strong>
+        </p>
 
-          {error && (
-            <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg">
-              ⚠️ {error}
-            </p>
-          )}
+        {error && (
+          <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg mb-4">
+            ⚠️ {error}
+          </p>
+        )}
 
+        <form onSubmit={handleSubmit}>
           <button
             type="submit"
             disabled={submitting}

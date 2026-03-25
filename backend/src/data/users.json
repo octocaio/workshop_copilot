@@ -1,0 +1,8 @@
+[
+  {
+    "id": "b4ccfdbc-e493-4354-9cc0-78aec1a8711e",
+    "name": "Test User",
+    "email": "test@test.com",
+    "passwordHash": "$2b$10$ukoCAfzVzySDSICQ44UcKu.1D2m6vJV5NumY6brcOfrVY/d57kUjO"
+  }
+]

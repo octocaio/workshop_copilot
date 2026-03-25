@@ -5,7 +5,7 @@ const { getProductById } = require('./productService');
 // Armazenamento de pedidos em memoria
 const orders = [];
 
-async function createOrder(productId, userEmail) {
+async function createOrder(productId, userId) {
   const product = getProductById(productId);
   if (!product) {
     return { success: false, error: 'Produto nao encontrado' };
@@ -13,7 +13,7 @@ async function createOrder(productId, userEmail) {
 
   // Verifica se o usuario ja comprou este produto
   const existingOrder = orders.find(
-    (o) => o.productId === productId && o.userEmail === userEmail
+    (o) => o.productId === productId && o.userId === userId
   );
   if (existingOrder) {
     return { success: false, error: 'Voce ja comprou este curso' };
@@ -21,7 +21,7 @@ async function createOrder(productId, userEmail) {
 
   const paymentResult = await processPayment({
     productId,
-    userEmail,
+    userId,
     amount: product.price,
   });
 
@@ -32,7 +32,7 @@ async function createOrder(productId, userEmail) {
   const order = {
     orderId: uuidv4(),
     productId,
-    userEmail,
+    userId,
     product: {
       id: product.id,
       title: product.title,
@@ -50,8 +50,8 @@ async function createOrder(productId, userEmail) {
   return { success: true, order };
 }
 
-function getOrdersByEmail(userEmail) {
-  return orders.filter((o) => o.userEmail === userEmail);
+function getOrdersByUserId(userId) {
+  return orders.filter((o) => o.userId === userId);
 }
 
-module.exports = { createOrder, getOrdersByEmail };
+module.exports = { createOrder, getOrdersByUserId };
