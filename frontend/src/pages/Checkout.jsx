@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchProduct, submitCheckout } from '../services/api';
@@ -27,7 +28,7 @@ export default function Checkout({ addToast }) {
     try {
       const result = await submitCheckout(productId, email);
       setSuccess(result);
-      addToast('Purchase completed successfully! 🎉', 'success');
+      addToast('Compra concluida com sucesso! 🎉', 'success');
     } catch (err) {
       setError(err.message);
       addToast(err.message, 'error');
@@ -36,14 +37,14 @@ export default function Checkout({ addToast }) {
     }
   };
 
-  if (loading) return <LoadingSpinner text="Loading checkout..." />;
+  if (loading) return <LoadingSpinner text="Carregando checkout..." />;
 
   if (!product) {
     return (
       <div className="text-center py-20">
-        <p className="text-red-500 text-lg">⚠️ Product not found</p>
+        <p className="text-red-500 text-lg">⚠️ Produto nao encontrado</p>
         <Link to="/" className="mt-4 inline-block text-indigo-600 hover:underline">
-          ← Back to catalog
+          ← Voltar ao catalogo
         </Link>
       </div>
     );
@@ -54,26 +55,26 @@ export default function Checkout({ addToast }) {
       <div className="max-w-lg mx-auto text-center py-16">
         <div className="text-6xl mb-6">🎉</div>
         <h1 className="text-3xl font-bold text-gray-900 mb-3">
-          Purchase Successful!
+          Compra Realizada!
         </h1>
         <p className="text-gray-600 mb-2">
-          Thank you for purchasing <strong>{product.title}</strong>.
+          Obrigado por comprar <strong>{product.title}</strong>.
         </p>
         <p className="text-sm text-gray-400 mb-8">
-          Order ID: {success.orderId}
+          ID do pedido: {success.orderId}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            to="/my-courses"
+            to="/meus-cursos"
             className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
           >
-            Go to My Courses
+            Ir para Meus Cursos
           </Link>
           <Link
             to="/"
             className="px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
           >
-            Browse More Courses
+            Ver Mais Cursos
           </Link>
         </div>
       </div>
@@ -83,14 +84,14 @@ export default function Checkout({ addToast }) {
   return (
     <div className="max-w-lg mx-auto">
       <Link
-        to={`/product/${productId}`}
+        to={`/produto/${productId}`}
         className="inline-flex items-center text-sm text-gray-500 hover:text-indigo-600 mb-6"
       >
-        ← Back to course
+        ← Voltar ao curso
       </Link>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Checkout</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">Finalizar Compra</h1>
 
         <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg mb-6">
           <img
@@ -112,7 +113,7 @@ export default function Checkout({ addToast }) {
               htmlFor="email"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Email Address
+              Endereco de e-mail
             </label>
             <input
               type="email"
@@ -120,7 +121,7 @@ export default function Checkout({ addToast }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="you@example.com"
+              placeholder="voce@exemplo.com"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
             />
           </div>
@@ -139,18 +140,22 @@ export default function Checkout({ addToast }) {
             {submitting ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                Processing...
+                Processando...
               </>
             ) : (
-              `Complete Purchase — $${product.price.toFixed(2)}`
+              `Concluir compra — $${product.price.toFixed(2)}`
             )}
           </button>
         </form>
 
         <p className="mt-4 text-xs text-gray-400 text-center">
-          🔒 Your payment is secure. This is a simulated checkout.
+          🔒 Seu pagamento esta seguro. Este checkout e simulado.
         </p>
       </div>
     </div>
   );
 }
+
+Checkout.propTypes = {
+  addToast: PropTypes.func.isRequired,
+};

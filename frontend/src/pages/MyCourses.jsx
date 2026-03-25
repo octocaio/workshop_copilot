@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { fetchOrders } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -19,7 +20,7 @@ export default function MyCourses({ addToast }) {
       const data = await fetchOrders(email);
       setOrders(data);
       if (data.length === 0) {
-        addToast('No courses found for this email', 'info');
+        addToast('Nenhum curso encontrado para este e-mail', 'info');
       }
     } catch (err) {
       setError(err.message);
@@ -32,9 +33,9 @@ export default function MyCourses({ addToast }) {
   return (
     <div>
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900">My Courses</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Meus Cursos</h1>
         <p className="mt-2 text-gray-500">
-          Enter your email to access your purchased courses
+          Informe seu e-mail para acessar seus cursos comprados
         </p>
       </div>
 
@@ -47,7 +48,7 @@ export default function MyCourses({ addToast }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          placeholder="you@example.com"
+          placeholder="voce@exemplo.com"
           className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
         />
         <button
@@ -55,24 +56,24 @@ export default function MyCourses({ addToast }) {
           disabled={loading}
           className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
         >
-          {loading ? 'Loading...' : 'View'}
+          {loading ? 'Carregando...' : 'Ver'}
         </button>
       </form>
 
-      {loading && <LoadingSpinner text="Fetching your courses..." />}
+      {loading && <LoadingSpinner text="Buscando seus cursos..." />}
 
       {error && (
         <p className="text-center text-red-500">⚠️ {error}</p>
       )}
 
-      {orders && orders.length === 0 && (
+      {orders?.length === 0 && (
         <div className="text-center py-12">
           <div className="text-5xl mb-4">📚</div>
           <p className="text-gray-500 text-lg">
-            No courses found for this email.
+            Nenhum curso encontrado para este e-mail.
           </p>
           <p className="text-gray-400 text-sm mt-1">
-            Purchase a course to get started!
+            Compre um curso para comecar!
           </p>
         </div>
       )}
@@ -80,7 +81,7 @@ export default function MyCourses({ addToast }) {
       {orders && orders.length > 0 && (
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-gray-900">
-            {orders.length} course{orders.length > 1 ? 's' : ''} purchased
+            {orders.length} curso{orders.length > 1 ? 's' : ''} comprado{orders.length > 1 ? 's' : ''}
           </h2>
 
           {orders.map((order) => (
@@ -99,7 +100,7 @@ export default function MyCourses({ addToast }) {
                     {order.product.title}
                   </h3>
                   <p className="text-sm text-gray-500 mt-1">
-                    Purchased on{' '}
+                    Comprado em{' '}
                     {new Date(order.purchasedAt).toLocaleDateString()}
                   </p>
                   <button
@@ -110,7 +111,7 @@ export default function MyCourses({ addToast }) {
                     }
                     className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
                   >
-                    {watchingId === order.orderId ? '⏸️ Close' : '▶️ Watch'}
+                    {watchingId === order.orderId ? '⏸️ Fechar' : '▶️ Assistir'}
                   </button>
                 </div>
               </div>
@@ -135,3 +136,7 @@ export default function MyCourses({ addToast }) {
     </div>
   );
 }
+
+MyCourses.propTypes = {
+  addToast: PropTypes.func.isRequired,
+};

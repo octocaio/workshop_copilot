@@ -1,16 +1,45 @@
-# React + Vite
+# Frontend LearnHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend da plataforma LearnHub, construido com React, Vite e Tailwind CSS.
 
-Currently, two official plugins are available:
+## Objetivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Esta interface permite:
 
-## React Compiler
+- navegar pelo catalogo de cursos
+- visualizar detalhes de cada curso
+- finalizar uma compra com pagamento simulado
+- consultar cursos adquiridos a partir do e-mail informado
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React 19
+- React Router 7
+- Vite 8
+- Tailwind CSS 4
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Executando localmente
+
+```bash
+npm install
+npm run dev
+```
+
+Por padrao, a aplicacao roda em `http://localhost:5173`.
+
+## Integracao com o backend
+
+As chamadas HTTP usam o prefixo `/api`.
+
+No ambiente de desenvolvimento, o arquivo `vite.config.js` redireciona essas requisicoes para `http://localhost:3001`.
+
+## Estrutura principal
+
+```text
+src/
+	components/   Componentes compartilhados
+	pages/        Paginas da aplicacao
+	services/     Funcoes de acesso a API
+	App.jsx       Mapa de rotas da SPA
+	main.jsx      Bootstrap do React
+```

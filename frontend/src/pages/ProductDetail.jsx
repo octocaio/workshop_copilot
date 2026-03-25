@@ -16,14 +16,14 @@ export default function ProductDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <LoadingSpinner text="Loading course details..." />;
+  if (loading) return <LoadingSpinner text="Carregando detalhes do curso..." />;
 
   if (error || !product) {
     return (
       <div className="text-center py-20">
-        <p className="text-red-500 text-lg">⚠️ {error || 'Course not found'}</p>
+        <p className="text-red-500 text-lg">⚠️ {error || 'Curso nao encontrado'}</p>
         <Link to="/" className="mt-4 inline-block text-indigo-600 hover:underline">
-          ← Back to catalog
+          ← Voltar ao catalogo
         </Link>
       </div>
     );
@@ -35,7 +35,7 @@ export default function ProductDetail() {
         to="/"
         className="inline-flex items-center text-sm text-gray-500 hover:text-indigo-600 mb-6"
       >
-        ← Back to catalog
+        ← Voltar ao catalogo
       </Link>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -58,33 +58,33 @@ export default function ProductDetail() {
               ${product.price.toFixed(2)}
             </span>
             <Link
-              to={`/checkout/${product.id}`}
+              to={`/finalizar-compra/${product.id}`}
               className="inline-flex items-center px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
             >
-              Purchase Now
+              Comprar Agora
             </Link>
           </div>
 
           <div className="mt-8 border-t border-gray-100 pt-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-3">
-              What you will learn
+              O que voce vai aprender
             </h2>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start gap-2">
                 <span className="text-green-500 mt-1">✓</span>
-                <span>Complete hands-on projects and exercises</span>
+                <span>Projetos praticos e exercicios aplicados</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-green-500 mt-1">✓</span>
-                <span>Industry best practices and patterns</span>
+                <span>Boas praticas e padroes usados no mercado</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-green-500 mt-1">✓</span>
-                <span>Lifetime access to course content</span>
+                <span>Acesso vitalicio ao conteudo do curso</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-green-500 mt-1">✓</span>
-                <span>Certificate of completion</span>
+                <span>Certificado de conclusao</span>
               </li>
             </ul>
           </div>

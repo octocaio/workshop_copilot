@@ -1,18 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
-
-export function useToast() {
-  const [toasts, setToasts] = useState([]);
-
-  const addToast = useCallback((message, type = 'info') => {
-    const id = Date.now();
-    setToasts((prev) => [...prev, { id, message, type }]);
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 4000);
-  }, []);
-
-  return { toasts, addToast };
-}
+import PropTypes from 'prop-types';
 
 export function ToastContainer({ toasts }) {
   if (toasts.length === 0) return null;
@@ -45,3 +31,13 @@ export function ToastContainer({ toasts }) {
     </div>
   );
 }
+
+ToastContainer.propTypes = {
+  toasts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      message: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

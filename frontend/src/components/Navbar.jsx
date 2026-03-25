@@ -14,13 +14,13 @@ export default function Navbar() {
               to="/"
               className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
             >
-              Catalog
+              Catalogo
             </Link>
             <Link
-              to="/my-courses"
+              to="/meus-cursos"
               className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
             >
-              My Courses
+              Meus Cursos
             </Link>
           </div>
         </div>

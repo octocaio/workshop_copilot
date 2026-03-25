@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import { ToastContainer, useToast } from './components/Toast';
+import { ToastContainer } from './components/Toast';
+import { useToast } from './hooks/useToast';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
@@ -17,13 +18,13 @@ export default function App() {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/produto/:id" element={<ProductDetail />} />
             <Route
-              path="/checkout/:productId"
+              path="/finalizar-compra/:productId"
               element={<Checkout addToast={addToast} />}
             />
             <Route
-              path="/my-courses"
+              path="/meus-cursos"
               element={<MyCourses addToast={addToast} />}
             />
           </Routes>
