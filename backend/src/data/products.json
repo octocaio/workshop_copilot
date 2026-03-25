@@ -1,0 +1,50 @@
+[
+  {
+    "id": "course-1",
+    "title": "Complete JavaScript Mastery",
+    "description": "Master JavaScript from zero to hero. Learn ES6+, async programming, closures, prototypes, and build real-world projects. This comprehensive course covers everything you need to become a proficient JavaScript developer.",
+    "price": 49.99,
+    "thumbnail": "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600&q=80",
+    "videoUrl": "https://www.youtube.com/embed/PkZNo7MFNFg"
+  },
+  {
+    "id": "course-2",
+    "title": "React & Next.js Pro",
+    "description": "Build production-ready React applications with Next.js. Learn hooks, state management, server-side rendering, API routes, and deployment strategies used by top companies.",
+    "price": 69.99,
+    "thumbnail": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80",
+    "videoUrl": "https://www.youtube.com/embed/Ke90Tje7VS0"
+  },
+  {
+    "id": "course-3",
+    "title": "Node.js Backend Development",
+    "description": "Learn to build scalable backend APIs with Node.js and Express. Covers REST APIs, authentication, database integration, testing, and deployment to production environments.",
+    "price": 59.99,
+    "thumbnail": "https://images.unsplash.com/photo-1618477247222-acbdb0e159b3?w=600&q=80",
+    "videoUrl": "https://www.youtube.com/embed/Oe421EPjeBE"
+  },
+  {
+    "id": "course-4",
+    "title": "TailwindCSS Design Systems",
+    "description": "Create beautiful, responsive UIs with TailwindCSS. Learn utility-first CSS, component patterns, custom themes, animations, and how to build a complete design system from scratch.",
+    "price": 39.99,
+    "thumbnail": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=600&q=80",
+    "videoUrl": "https://www.youtube.com/embed/UBOj6rqRUME"
+  },
+  {
+    "id": "course-5",
+    "title": "Full-Stack TypeScript",
+    "description": "End-to-end TypeScript development. Master types, generics, decorators, and build full-stack applications with TypeScript on both frontend and backend for maximum type safety.",
+    "price": 79.99,
+    "thumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600&q=80",
+    "videoUrl": "https://www.youtube.com/embed/BwuLxPH8IDs"
+  },
+  {
+    "id": "course-6",
+    "title": "DevOps & Cloud Deployment",
+    "description": "Deploy like a pro. Learn Docker, CI/CD pipelines, AWS/GCP basics, monitoring, and infrastructure as code. Everything you need to ship your applications with confidence.",
+    "price": 89.99,
+    "thumbnail": "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&q=80",
+    "videoUrl": "https://www.youtube.com/embed/j5Zsa_eOXeY"
+  }
+]
