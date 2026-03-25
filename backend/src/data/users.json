@@ -4,5 +4,11 @@
     "name": "Test User",
     "email": "test@test.com",
     "passwordHash": "$2b$10$ukoCAfzVzySDSICQ44UcKu.1D2m6vJV5NumY6brcOfrVY/d57kUjO"
+  },
+  {
+    "id": "88d9bce5-31ab-45a0-bd9f-0fbe05558ea1",
+    "name": "Caio ",
+    "email": "ccesar.qp@gmail.com",
+    "passwordHash": "$2b$10$T5dZR0MGclWm56d5DajD8up8Jk9/2IcfBLKwPtIzj7V.HiLK/bWN."
   }
 ]
