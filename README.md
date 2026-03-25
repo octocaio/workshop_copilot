@@ -1,38 +1,41 @@
-# LearnHub — Infoproduct Platform
+# LearnHub — Plataforma de Infoprodutos
 
-A minimal but production-like infoproduct platform (Hotmart-like) where users can browse a catalog of courses, purchase them, and access the content.
+Uma plataforma enxuta de venda de cursos online, inspirada em experiencias como Hotmart, criada para demonstracoes e workshops com GitHub Copilot.
 
-## 🧱 Architecture
+## Arquitetura
 
-- **Backend:** Node.js + Express (REST API)
-- **Frontend:** React (Vite) + TailwindCSS
-- **Storage:** In-memory (no database required)
-- **Payment:** Mock payment gateway (easily replaceable with Stripe, etc.)
+- **Backend:** Node.js + Express com API REST
+- **Frontend:** React + Vite + Tailwind CSS
+- **Armazenamento:** catalogo em JSON local e pedidos em memoria
+- **Pagamento:** servico simulado, facil de substituir por Stripe, PayPal ou similar
 
-## 📁 Project Structure
+## Estrutura do projeto
 
-```
+```text
 backend/
   src/
-    routes/          # Express route definitions
-    controllers/     # Request handlers
-    services/        # Business logic (products, orders, payments)
-    data/            # JSON data (products catalog)
+    routes/          # Definicao das rotas Express
+    controllers/     # Manipuladores das requisicoes
+    services/        # Regras de negocio e integracoes
+    data/            # Dados JSON do catalogo
 
 frontend/
   src/
-    pages/           # React page components
-    components/      # Reusable UI components
-    services/        # API client layer
+    pages/           # Paginas da aplicacao
+    components/      # Componentes reutilizaveis
+    services/        # Camada cliente da API
+
+docs/
+  architecture.md    # Documentacao da arquitetura
 ```
 
-## 🚀 Getting Started
+## Como executar
 
-### Prerequisites
+### Pre-requisitos
 
-- Node.js 18+ installed
+- Node.js 18 ou superior
 
-### 1. Start the Backend
+### 1. Subir o backend
 
 ```bash
 cd backend
@@ -40,9 +43,9 @@ npm install
 npm run dev
 ```
 
-The API server will start on **http://localhost:3001**.
+A API sera iniciada em **http://localhost:3001**.
 
-### 2. Start the Frontend
+### 2. Subir o frontend
 
 ```bash
 cd frontend
@@ -50,36 +53,46 @@ npm install
 npm run dev
 ```
 
-The app will open on **http://localhost:5173**.
+A aplicacao sera aberta em **http://localhost:5173**.
 
-> The frontend proxies API requests to the backend via Vite's dev server proxy configuration.
+> Durante o desenvolvimento, o frontend usa o proxy do Vite para encaminhar chamadas `/api` ao backend.
 
-## 🔌 API Endpoints
+## Endpoints da API
 
-| Method | Endpoint              | Description                    |
-| ------ | --------------------- | ------------------------------ |
-| GET    | `/products`           | List all courses               |
-| GET    | `/products/:id`       | Get a single course            |
-| POST   | `/checkout`           | Purchase a course              |
-| GET    | `/orders/:userEmail`  | Get purchased courses by email |
-| GET    | `/health`             | Health check                   |
+| Metodo | Endpoint | Descricao |
+| --- | --- | --- |
+| `GET` | `/products` | Lista todos os cursos |
+| `GET` | `/products/:id` | Retorna um curso especifico |
+| `POST` | `/checkout` | Processa a compra de um curso |
+| `GET` | `/orders/:userEmail` | Lista compras associadas a um e-mail |
+| `GET` | `/health` | Verifica a saude da API |
 
-### POST /checkout body
+### Exemplo de corpo para `POST /checkout`
 
 ```json
 {
   "productId": "course-1",
-  "userEmail": "user@example.com"
+  "userEmail": "usuario@exemplo.com"
 }
 ```
 
-## 🎨 Features
+## Funcionalidades
 
-- **Catalog Page** — Browse all available courses with pricing
-- **Product Detail** — View full course description with purchase button
-- **Checkout** — Enter email and complete purchase (mock payment)
-- **My Courses** — Enter email to view purchased courses and watch embedded videos
-- **Toast Notifications** — Success/error feedback
-- **Loading States** — Spinners during data fetching
-- **Responsive Design** — Works on mobile and desktop
-- **Payment Abstraction** — Mock gateway ready to be replaced with Stripe/PayPal
+- **Catalogo**: exibe os cursos disponiveis com imagem, descricao resumida e preco
+- **Detalhe do curso**: mostra informacoes completas e leva ao fluxo de compra
+- **Finalizacao da compra**: coleta o e-mail e executa o pagamento simulado
+- **Meus cursos**: busca cursos comprados pelo e-mail informado
+- **Notificacoes**: mostra feedback de sucesso, erro e informacao
+- **Estados de carregamento**: usa spinners durante requisicoes assincronas
+- **Layout responsivo**: funciona em desktop e mobile
+
+## Limitacoes atuais
+
+- Os pedidos ficam apenas em memoria e sao perdidos ao reiniciar o backend
+- Nao ha autenticacao nem cadastro de usuarios
+- O catalogo depende de dados estaticos em arquivo JSON
+- O pagamento e apenas simulado para fins de demo
+
+## Documentacao complementar
+
+- Veja `docs/architecture.md` para uma visao detalhada da arquitetura implementada.

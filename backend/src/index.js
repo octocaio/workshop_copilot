@@ -7,31 +7,26 @@ const orderRoutes = require('./routes/orders');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Rotas
 app.use('/products', productRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/orders', orderRoutes);
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
-});
-
-// 404 handler
+// Tratamento de 404
 app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ error: 'Rota nao encontrada' });
 });
 
-// Global error handler
+// Tratamento global de erros
 app.use((err, req, res, _next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal server error' });
+  console.error('Erro nao tratado:', err);
+  res.status(500).json({ error: 'Erro interno do servidor' });
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Backend server running on http://localhost:${PORT}`);
+  console.log(`🚀 Servidor backend em execucao em http://localhost:${PORT}`);
 });

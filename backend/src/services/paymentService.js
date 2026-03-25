@@ -1,18 +1,18 @@
 /**
- * Mock payment gateway abstraction.
- * Replace this implementation with Stripe, PayPal, etc. in production.
+ * Abstracao de gateway de pagamento simulado.
+ * Substitua esta implementacao por Stripe, PayPal etc. em producao.
  */
 
 function processPayment({ productId, userEmail, amount }) {
-  // Simulate a ~200ms payment processing delay
+  // Simula um atraso de ~200ms no processamento do pagamento
   return new Promise((resolve) => {
     setTimeout(() => {
-      // Simulate a 95% success rate
+      // Simula uma taxa de sucesso de 95%
       const success = Math.random() < 0.95;
       resolve({
         success,
         transactionId: success ? `txn_${Date.now()}_${Math.random().toString(36).slice(2, 9)}` : null,
-        message: success ? 'Payment processed successfully' : 'Payment declined. Please try again.',
+        message: success ? 'Pagamento processado com sucesso' : 'Pagamento recusado. Tente novamente.',
       });
     }, 200);
   });

@@ -1,7 +1,7 @@
 {
   "name": "infoproduct-backend",
   "version": "1.0.0",
-  "description": "Backend API for infoproduct platform",
+  "description": "API backend da plataforma de infoprodutos",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",

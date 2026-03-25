@@ -2,21 +2,21 @@ const { v4: uuidv4 } = require('uuid');
 const { processPayment } = require('./paymentService');
 const { getProductById } = require('./productService');
 
-// In-memory orders store
+// Armazenamento de pedidos em memoria
 const orders = [];
 
 async function createOrder(productId, userEmail) {
   const product = getProductById(productId);
   if (!product) {
-    return { success: false, error: 'Product not found' };
+    return { success: false, error: 'Produto nao encontrado' };
   }
 
-  // Check if user already purchased this product
+  // Verifica se o usuario ja comprou este produto
   const existingOrder = orders.find(
     (o) => o.productId === productId && o.userEmail === userEmail
   );
   if (existingOrder) {
-    return { success: false, error: 'You have already purchased this course' };
+    return { success: false, error: 'Voce ja comprou este curso' };
   }
 
   const paymentResult = await processPayment({

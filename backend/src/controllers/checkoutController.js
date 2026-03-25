@@ -4,13 +4,13 @@ async function checkout(req, res) {
   const { productId, userEmail } = req.body;
 
   if (!productId || !userEmail) {
-    return res.status(400).json({ error: 'productId and userEmail are required' });
+    return res.status(400).json({ error: 'productId e userEmail sao obrigatorios' });
   }
 
-  // Basic email validation
+  // Validacao basica de e-mail
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(userEmail)) {
-    return res.status(400).json({ error: 'Invalid email format' });
+    return res.status(400).json({ error: 'Formato de e-mail invalido' });
   }
 
   const result = await createOrder(productId, userEmail);
@@ -22,7 +22,7 @@ async function checkout(req, res) {
   res.status(201).json({
     success: true,
     orderId: result.order.orderId,
-    message: 'Purchase completed successfully!',
+    message: 'Compra concluida com sucesso!',
   });
 }
 

@@ -8,7 +8,7 @@ function listProducts(req, res) {
 function getProduct(req, res) {
   const product = getProductById(req.params.id);
   if (!product) {
-    return res.status(404).json({ error: 'Product not found' });
+    return res.status(404).json({ error: 'Produto nao encontrado' });
   }
   res.json(product);
 }
