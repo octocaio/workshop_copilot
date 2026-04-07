@@ -2,9 +2,11 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { fetchProduct, submitCheckout } from '../services/api';
+import { useApp } from '../context/AppContext';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function Checkout({ addToast }) {
+  const { t } = useApp();
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [email, setEmail] = useState('');
@@ -28,7 +30,7 @@ export default function Checkout({ addToast }) {
     try {
       const result = await submitCheckout(productId, email);
       setSuccess(result);
-      addToast('Compra concluida com sucesso! 🎉', 'success');
+      addToast(t('checkout.success') + ' 🎉', 'success');
     } catch (err) {
       setError(err.message);
       addToast(err.message, 'error');
@@ -37,14 +39,19 @@ export default function Checkout({ addToast }) {
     }
   };
 
-  if (loading) return <LoadingSpinner text="Carregando checkout..." />;
+  if (loading) return <LoadingSpinner text={t('checkout.processing')} />;
 
   if (!product) {
     return (
       <div className="text-center py-20">
-        <p className="text-red-500 text-lg">⚠️ Produto nao encontrado</p>
-        <Link to="/" className="mt-4 inline-block text-indigo-600 hover:underline">
-          ← Voltar ao catalogo
+        <p className="text-red-500 dark:text-red-400 text-lg">
+          ⚠️ {t('product.notFound')}
+        </p>
+        <Link
+          to="/"
+          className="mt-4 inline-block text-indigo-600 dark:text-indigo-400 hover:underline"
+        >
+          ← {t('nav.catalog')}
         </Link>
       </div>
     );
@@ -54,27 +61,27 @@ export default function Checkout({ addToast }) {
     return (
       <div className="max-w-lg mx-auto text-center py-16">
         <div className="text-6xl mb-6">🎉</div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">
-          Compra Realizada!
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+          {t('checkout.success')}
         </h1>
-        <p className="text-gray-600 mb-2">
+        <p className="text-gray-600 dark:text-gray-400 mb-2">
           Obrigado por comprar <strong>{product.title}</strong>.
         </p>
-        <p className="text-sm text-gray-400 mb-8">
+        <p className="text-sm text-gray-400 dark:text-gray-500 mb-8">
           ID do pedido: {success.orderId}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            to="/meus-cursos"
-            className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
+            to="/minha-conta"
+            className="px-6 py-3 bg-indigo-600 dark:bg-indigo-500 text-white font-semibold rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors"
           >
-            Ir para Meus Cursos
+            {t('nav.myAccount')}
           </Link>
           <Link
             to="/"
-            className="px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+            className="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
-            Ver Mais Cursos
+            {t('nav.catalog')}
           </Link>
         </div>
       </div>
@@ -85,24 +92,28 @@ export default function Checkout({ addToast }) {
     <div className="max-w-lg mx-auto">
       <Link
         to={`/produto/${productId}`}
-        className="inline-flex items-center text-sm text-gray-500 hover:text-indigo-600 mb-6"
+        className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 mb-6"
       >
         ← Voltar ao curso
       </Link>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Finalizar Compra</h1>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 transition-colors">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          {t('checkout.title')}
+        </h1>
 
-        <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg mb-6">
+        <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg mb-6">
           <img
             src={product.thumbnail}
             alt={product.title}
             className="w-16 h-16 rounded-lg object-cover"
           />
           <div>
-            <h3 className="font-semibold text-gray-900">{product.title}</h3>
-            <p className="text-indigo-600 font-bold">
-              ${product.price.toFixed(2)}
+            <h3 className="font-semibold text-gray-900 dark:text-white">
+              {product.title}
+            </h3>
+            <p className="text-indigo-600 dark:text-indigo-400 font-bold">
+              R$ {product.price.toFixed(2)}
             </p>
           </div>
         </div>
@@ -111,9 +122,9 @@ export default function Checkout({ addToast }) {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
-              Endereco de e-mail
+              {t('checkout.email')}
             </label>
             <input
               type="email"
@@ -121,13 +132,13 @@ export default function Checkout({ addToast }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="voce@exemplo.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+              placeholder={t('checkout.emailPlaceholder')}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
           </div>
 
           {error && (
-            <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg">
+            <p className="text-red-500 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
               ⚠️ {error}
             </p>
           )}
@@ -135,20 +146,20 @@ export default function Checkout({ addToast }) {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-3 bg-indigo-600 dark:bg-indigo-500 text-white font-semibold rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {submitting ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                Processando...
+                {t('checkout.processing')}
               </>
             ) : (
-              `Concluir compra — $${product.price.toFixed(2)}`
+              `${t('checkout.complete')} — R$ ${product.price.toFixed(2)}`
             )}
           </button>
         </form>
 
-        <p className="mt-4 text-xs text-gray-400 text-center">
+        <p className="mt-4 text-xs text-gray-400 dark:text-gray-500 text-center">
           🔒 Seu pagamento esta seguro. Este checkout e simulado.
         </p>
       </div>
