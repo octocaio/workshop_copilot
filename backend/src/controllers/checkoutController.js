@@ -1,16 +1,11 @@
 const { createOrder } = require('../services/orderService');
 
 async function checkout(req, res) {
-  const { productId, userEmail } = req.body;
+  const { productId } = req.body;
+  const userEmail = req.user.email;
 
-  if (!productId || !userEmail) {
-    return res.status(400).json({ error: 'productId e userEmail sao obrigatorios' });
-  }
-
-  // Validacao basica de e-mail
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(userEmail)) {
-    return res.status(400).json({ error: 'Formato de e-mail invalido' });
+  if (!productId) {
+    return res.status(400).json({ error: 'productId e obrigatorio' });
   }
 
   const result = await createOrder(productId, userEmail);
