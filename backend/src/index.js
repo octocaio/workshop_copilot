@@ -30,3 +30,12 @@ app.use((err, req, res, _next) => {
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend em execucao em http://localhost:${PORT}`);
 });
+
+// adicione um health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'ok',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
