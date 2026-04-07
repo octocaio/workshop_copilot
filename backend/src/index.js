@@ -3,6 +3,7 @@ const cors = require('cors');
 const productRoutes = require('./routes/products');
 const checkoutRoutes = require('./routes/checkout');
 const orderRoutes = require('./routes/orders');
+const progressRoutes = require('./routes/progress');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/products', productRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/orders', orderRoutes);
+app.use('/progress', progressRoutes);
 
 // Tratamento de 404
 app.use((req, res) => {

@@ -28,3 +28,13 @@ export async function fetchOrders(userEmail) {
   if (!res.ok) throw new Error('Falha ao buscar pedidos');
   return res.json();
 }
+
+export async function updateProgress(orderId, userEmail, progressData) {
+  const res = await fetch(`${API_BASE}/progress/${orderId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userEmail, ...progressData }),
+  });
+  if (!res.ok) throw new Error('Falha ao atualizar progresso');
+  return res.json();
+}

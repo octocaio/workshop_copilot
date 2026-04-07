@@ -5,6 +5,9 @@ const { getProductById } = require('./productService');
 // Armazenamento de pedidos em memoria
 const orders = [];
 
+// Armazenamento de progresso em memoria
+const progress = [];
+
 async function createOrder(productId, userEmail) {
   const product = getProductById(productId);
   if (!product) {
@@ -47,11 +50,73 @@ async function createOrder(productId, userEmail) {
 
   orders.push(order);
 
+  // Inicializa progresso para o curso
+  progress.push({
+    orderId: order.orderId,
+    userEmail,
+    productId,
+    completed: false,
+    progress: 0,
+    lastAccessed: new Date().toISOString(),
+  });
+
   return { success: true, order };
 }
 
 function getOrdersByEmail(userEmail) {
-  return orders.filter((o) => o.userEmail === userEmail);
+  const userOrders = orders.filter((o) => o.userEmail === userEmail);
+
+  // Adiciona informacoes de progresso a cada pedido
+  return userOrders.map((order) => {
+    const orderProgress = progress.find((p) => p.orderId === order.orderId) || {
+      completed: false,
+      progress: 0,
+      lastAccessed: order.purchasedAt,
+    };
+
+    return {
+      ...order,
+      progress: orderProgress,
+    };
+  });
 }
 
-module.exports = { createOrder, getOrdersByEmail };
+function updateProgress(orderId, userEmail, progressData) {
+  const order = orders.find((o) => o.orderId === orderId && o.userEmail === userEmail);
+
+  if (!order) {
+    return { success: false, error: 'Pedido nao encontrado' };
+  }
+
+  let orderProgress = progress.find((p) => p.orderId === orderId);
+
+  if (!orderProgress) {
+    orderProgress = {
+      orderId,
+      userEmail,
+      productId: order.productId,
+      completed: false,
+      progress: 0,
+      lastAccessed: new Date().toISOString(),
+    };
+    progress.push(orderProgress);
+  }
+
+  // Atualiza progresso
+  if (progressData.progress !== undefined) {
+    orderProgress.progress = Math.min(100, Math.max(0, progressData.progress));
+  }
+
+  if (progressData.completed !== undefined) {
+    orderProgress.completed = progressData.completed;
+    if (progressData.completed) {
+      orderProgress.progress = 100;
+    }
+  }
+
+  orderProgress.lastAccessed = new Date().toISOString();
+
+  return { success: true, progress: orderProgress };
+}
+
+module.exports = { createOrder, getOrdersByEmail, updateProgress };
