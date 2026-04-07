@@ -7,7 +7,6 @@ import LoadingSpinner from '../components/LoadingSpinner';
 export default function Checkout({ addToast }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
@@ -26,7 +25,7 @@ export default function Checkout({ addToast }) {
     setError(null);
 
     try {
-      const result = await submitCheckout(productId, email);
+      const result = await submitCheckout(productId);
       setSuccess(result);
       addToast('Compra concluida com sucesso! 🎉', 'success');
     } catch (err) {
@@ -108,24 +107,6 @@ export default function Checkout({ addToast }) {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Endereco de e-mail
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="voce@exemplo.com"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-            />
-          </div>
-
           {error && (
             <p className="text-red-500 text-sm bg-red-50 p-3 rounded-lg">
               ⚠️ {error}
